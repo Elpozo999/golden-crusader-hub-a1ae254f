@@ -27,7 +27,7 @@ export default function Sanctions() {
           </div>
         ) : Object.keys(grouped).length > 0 ? (
           <div className="space-y-8">
-            {Object.entries(grouped).map(([category, items]) => (
+            {Object.entries(grouped).map(([category, items]: [string, any[]]) => (
               <div key={category} className="space-y-3">
                 <h2 className="font-heading text-2xl font-bold text-primary border-b border-border pb-2">
                   {category}
