@@ -13,6 +13,7 @@ const navItems = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const { data: settings } = useSettings();
 
   return (
     <div className="min-h-screen bg-background">
