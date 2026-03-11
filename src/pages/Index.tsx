@@ -15,10 +15,10 @@ const Index = () => {
             <Gamepad2 className="h-12 w-12 text-primary" />
           </div>
           <h1 className="font-heading text-5xl md:text-7xl font-black text-primary drop-shadow-lg">
-            Gnsader
+            {settings?.site_name || "Gnsader"}
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground font-body max-w-lg mx-auto">
-            مرحباً بك في سيرفر Gnsader — أفضل تجربة SA-MP
+            {settings?.site_description || "مرحباً بك في سيرفر Gnsader — أفضل تجربة SA-MP"}
           </p>
         </div>
 
@@ -33,7 +33,7 @@ const Index = () => {
             disabled={isLoading}
           >
             <ExternalLink className="h-5 w-5" />
-            دخول الديسكورد
+            {settings?.discord_button_text || "دخول الديسكورد"}
           </Button>
 
           <Button
@@ -46,7 +46,7 @@ const Index = () => {
             disabled={isLoading}
           >
             <Download className="h-5 w-5" />
-            تحميل اللعبة
+            {settings?.download_button_text || "تحميل اللعبة"}
           </Button>
         </div>
 

@@ -9,7 +9,7 @@ import { useSettings, useUpdateSetting } from "@/hooks/useSettings";
 import { useRules, useAddRule, useUpdateRule, useDeleteRule } from "@/hooks/useRules";
 import { useJobs, useAddJob, useUpdateJob, useDeleteJob } from "@/hooks/useJobs";
 import { useSanctions, useAddSanction, useUpdateSanction, useDeleteSanction } from "@/hooks/useSanctions";
-import { Lock, Trash2, Plus, Save, Link2, Loader2 } from "lucide-react";
+import { Lock, Trash2, Plus, Save, Link2, Loader2, Home } from "lucide-react";
 import { toast } from "sonner";
 
 const ADMIN_CODE = "106";
@@ -59,14 +59,18 @@ export default function Admin() {
       <div className="max-w-4xl mx-auto space-y-6">
         <h1 className="font-heading text-3xl font-bold text-primary">لوحة المطورين</h1>
 
-        <Tabs defaultValue="settings" dir="rtl">
-          <TabsList className="grid w-full grid-cols-4 bg-secondary">
-            <TabsTrigger value="settings">الإعدادات</TabsTrigger>
+        <Tabs defaultValue="homepage" dir="rtl">
+          <TabsList className="grid w-full grid-cols-5 bg-secondary">
+            <TabsTrigger value="homepage">الصفحة الرئيسية</TabsTrigger>
+            <TabsTrigger value="settings">الروابط</TabsTrigger>
             <TabsTrigger value="rules">القوانين</TabsTrigger>
             <TabsTrigger value="jobs">الوظائف</TabsTrigger>
             <TabsTrigger value="sanctions">العقوبات</TabsTrigger>
           </TabsList>
 
+          <TabsContent value="homepage">
+            <HomepagePanel />
+          </TabsContent>
           <TabsContent value="settings">
             <SettingsPanel />
           </TabsContent>
@@ -82,6 +86,67 @@ export default function Admin() {
         </Tabs>
       </div>
     </Layout>
+  );
+}
+
+function HomepagePanel() {
+  const { data: settings, isLoading } = useSettings();
+  const updateSetting = useUpdateSetting();
+  const [siteName, setSiteName] = useState("");
+  const [siteDesc, setSiteDesc] = useState("");
+  const [discordBtn, setDiscordBtn] = useState("");
+  const [downloadBtn, setDownloadBtn] = useState("");
+  const [initialized, setInitialized] = useState(false);
+
+  if (settings && !initialized) {
+    setSiteName(settings.site_name || "Gnsader");
+    setSiteDesc(settings.site_description || "");
+    setDiscordBtn(settings.discord_button_text || "دخول الديسكورد");
+    setDownloadBtn(settings.download_button_text || "تحميل اللعبة");
+    setInitialized(true);
+  }
+
+  if (isLoading) return <Loader2 className="h-6 w-6 text-primary animate-spin mx-auto mt-8" />;
+
+  return (
+    <Card className="bg-card border-border">
+      <CardHeader>
+        <CardTitle className="font-heading text-primary flex items-center gap-2">
+          <Home className="h-5 w-5" /> بيانات الصفحة الرئيسية
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">اسم الموقع / السيرفر</label>
+          <Input value={siteName} onChange={(e) => setSiteName(e.target.value)} />
+        </div>
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">وصف الموقع</label>
+          <Textarea value={siteDesc} onChange={(e) => setSiteDesc(e.target.value)} />
+        </div>
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">اسم زر الديسكورد</label>
+          <Input value={discordBtn} onChange={(e) => setDiscordBtn(e.target.value)} />
+        </div>
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">اسم زر تحميل اللعبة</label>
+          <Input value={downloadBtn} onChange={(e) => setDownloadBtn(e.target.value)} />
+        </div>
+        <Button
+          onClick={async () => {
+            await updateSetting.mutateAsync({ key: "site_name", value: siteName });
+            await updateSetting.mutateAsync({ key: "site_description", value: siteDesc });
+            await updateSetting.mutateAsync({ key: "discord_button_text", value: discordBtn });
+            await updateSetting.mutateAsync({ key: "download_button_text", value: downloadBtn });
+            toast.success("تم حفظ بيانات الصفحة الرئيسية");
+          }}
+          disabled={updateSetting.isPending}
+          className="bg-primary text-primary-foreground"
+        >
+          <Save className="h-4 w-4 ml-2" /> حفظ
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
 
