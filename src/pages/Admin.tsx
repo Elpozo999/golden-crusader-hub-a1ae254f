@@ -9,7 +9,7 @@ import { useSettings, useUpdateSetting } from "@/hooks/useSettings";
 import { useRules, useAddRule, useUpdateRule, useDeleteRule } from "@/hooks/useRules";
 import { useJobs, useAddJob, useUpdateJob, useDeleteJob } from "@/hooks/useJobs";
 import { useSanctions, useAddSanction, useUpdateSanction, useDeleteSanction } from "@/hooks/useSanctions";
-import { Lock, Trash2, Plus, Save, Link2, Loader2 } from "lucide-react";
+import { Lock, Trash2, Plus, Save, Link2, Loader2, Home } from "lucide-react";
 import { toast } from "sonner";
 
 const ADMIN_CODE = "106";
