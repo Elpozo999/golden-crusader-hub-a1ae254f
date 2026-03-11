@@ -46,7 +46,7 @@ const Index = () => {
             disabled={isLoading}
           >
             <Download className="h-5 w-5" />
-            تحميل اللعبة
+            {settings?.download_button_text || "تحميل اللعبة"}
           </Button>
         </div>
 
