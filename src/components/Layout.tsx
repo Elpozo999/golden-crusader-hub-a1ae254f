@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Home, Scale, Briefcase, Gavel, Settings } from "lucide-react";
+import { Menu, X, Home, Scale, Briefcase, Gavel, Settings, Headset } from "lucide-react";
+import { useSettings } from "@/hooks/useSettings";
 
 const navItems = [
   { title: "الصفحة الرئيسية", path: "/", icon: Home },
@@ -12,6 +13,7 @@ const navItems = [
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const { data: settings } = useSettings();
 
   return (
     <div className="min-h-screen bg-background">
@@ -83,6 +85,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             );
           })}
+
+          {/* Support link */}
+          <button
+            onClick={() => {
+              setSidebarOpen(false);
+              if (settings?.support_link) window.open(settings.support_link, "_blank");
+            }}
+            className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-foreground hover:bg-secondary w-full"
+          >
+            <Headset className="h-5 w-5" />
+            <span className="text-base">الدعم الفني</span>
+          </button>
         </nav>
       </aside>
 

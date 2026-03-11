@@ -90,11 +90,13 @@ function SettingsPanel() {
   const updateSetting = useUpdateSetting();
   const [discord, setDiscord] = useState("");
   const [download, setDownload] = useState("");
+  const [support, setSupport] = useState("");
   const [initialized, setInitialized] = useState(false);
 
   if (settings && !initialized) {
     setDiscord(settings.discord_link || "");
     setDownload(settings.download_link || "");
+    setSupport(settings.support_link || "");
     setInitialized(true);
   }
 
@@ -116,10 +118,15 @@ function SettingsPanel() {
           <label className="text-sm text-muted-foreground">رابط تحميل اللعبة</label>
           <Input value={download} onChange={(e) => setDownload(e.target.value)} dir="ltr" />
         </div>
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">رابط الدعم الفني (ديسكورد)</label>
+          <Input value={support} onChange={(e) => setSupport(e.target.value)} dir="ltr" />
+        </div>
         <Button
           onClick={async () => {
             await updateSetting.mutateAsync({ key: "discord_link", value: discord });
             await updateSetting.mutateAsync({ key: "download_link", value: download });
+            await updateSetting.mutateAsync({ key: "support_link", value: support });
             toast.success("تم حفظ الإعدادات");
           }}
           disabled={updateSetting.isPending}
