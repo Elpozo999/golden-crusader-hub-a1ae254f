@@ -33,7 +33,7 @@ const Index = () => {
             disabled={isLoading}
           >
             <ExternalLink className="h-5 w-5" />
-            دخول الديسكورد
+            {settings?.discord_button_text || "دخول الديسكورد"}
           </Button>
 
           <Button
