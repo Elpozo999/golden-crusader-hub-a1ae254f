@@ -11,6 +11,9 @@ import { useJobs, useAddJob, useUpdateJob, useDeleteJob } from "@/hooks/useJobs"
 import { useSanctions, useAddSanction, useUpdateSanction, useDeleteSanction } from "@/hooks/useSanctions";
 import { Lock, Trash2, Plus, Save, Link2, Loader2, Home } from "lucide-react";
 import { toast } from "sonner";
+import LogoPanel from "@/components/admin/LogoPanel";
+import ButtonsPanel from "@/components/admin/ButtonsPanel";
+import FeaturesPanel from "@/components/admin/FeaturesPanel";
 
 const ADMIN_CODE = "106";
 
