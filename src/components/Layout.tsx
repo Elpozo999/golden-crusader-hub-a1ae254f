@@ -85,6 +85,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             );
           })}
+
+          {/* Support link */}
+          <button
+            onClick={() => {
+              setSidebarOpen(false);
+              if (settings?.support_link) window.open(settings.support_link, "_blank");
+            }}
+            className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-foreground hover:bg-secondary w-full"
+          >
+            <Headset className="h-5 w-5" />
+            <span className="text-base">الدعم الفني</span>
+          </button>
         </nav>
       </aside>
 
