@@ -20,8 +20,7 @@ export function useUpdateSetting() {
     mutationFn: async ({ key, value }: { key: string; value: string }) => {
       const { error } = await supabase
         .from("settings")
-        .update({ value })
-        .eq("key", key);
+        .upsert({ key, value }, { onConflict: "key" });
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["settings"] }),
