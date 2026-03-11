@@ -68,6 +68,9 @@ export default function Admin() {
             <TabsTrigger value="sanctions">العقوبات</TabsTrigger>
           </TabsList>
 
+          <TabsContent value="homepage">
+            <HomepagePanel />
+          </TabsContent>
           <TabsContent value="settings">
             <SettingsPanel />
           </TabsContent>
