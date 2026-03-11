@@ -11,6 +11,9 @@ import { useJobs, useAddJob, useUpdateJob, useDeleteJob } from "@/hooks/useJobs"
 import { useSanctions, useAddSanction, useUpdateSanction, useDeleteSanction } from "@/hooks/useSanctions";
 import { Lock, Trash2, Plus, Save, Link2, Loader2, Home } from "lucide-react";
 import { toast } from "sonner";
+import LogoPanel from "@/components/admin/LogoPanel";
+import ButtonsPanel from "@/components/admin/ButtonsPanel";
+import FeaturesPanel from "@/components/admin/FeaturesPanel";
 
 const ADMIN_CODE = "106";
 
@@ -60,8 +63,11 @@ export default function Admin() {
         <h1 className="font-heading text-3xl font-bold text-primary">لوحة المطورين</h1>
 
         <Tabs defaultValue="homepage" dir="rtl">
-          <TabsList className="grid w-full grid-cols-5 bg-secondary">
+          <TabsList className="flex flex-wrap w-full bg-secondary gap-1">
             <TabsTrigger value="homepage">الصفحة الرئيسية</TabsTrigger>
+            <TabsTrigger value="logo">اللوغو</TabsTrigger>
+            <TabsTrigger value="buttons">الأزرار</TabsTrigger>
+            <TabsTrigger value="features">المزايا</TabsTrigger>
             <TabsTrigger value="settings">الروابط</TabsTrigger>
             <TabsTrigger value="rules">القوانين</TabsTrigger>
             <TabsTrigger value="jobs">الوظائف</TabsTrigger>
@@ -70,6 +76,15 @@ export default function Admin() {
 
           <TabsContent value="homepage">
             <HomepagePanel />
+          </TabsContent>
+          <TabsContent value="logo">
+            <LogoPanel />
+          </TabsContent>
+          <TabsContent value="buttons">
+            <ButtonsPanel />
+          </TabsContent>
+          <TabsContent value="features">
+            <FeaturesPanel />
           </TabsContent>
           <TabsContent value="settings">
             <SettingsPanel />
