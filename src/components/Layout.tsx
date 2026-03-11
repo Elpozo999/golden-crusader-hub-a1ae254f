@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Home, Scale, Briefcase, Gavel, Settings } from "lucide-react";
+import { Menu, X, Home, Scale, Briefcase, Gavel, Settings, Headset } from "lucide-react";
+import { useSettings } from "@/hooks/useSettings";
 
 const navItems = [
   { title: "الصفحة الرئيسية", path: "/", icon: Home },

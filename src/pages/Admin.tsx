@@ -90,11 +90,13 @@ function SettingsPanel() {
   const updateSetting = useUpdateSetting();
   const [discord, setDiscord] = useState("");
   const [download, setDownload] = useState("");
+  const [support, setSupport] = useState("");
   const [initialized, setInitialized] = useState(false);
 
   if (settings && !initialized) {
     setDiscord(settings.discord_link || "");
     setDownload(settings.download_link || "");
+    setSupport(settings.support_link || "");
     setInitialized(true);
   }
 
